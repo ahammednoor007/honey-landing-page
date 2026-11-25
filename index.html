@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Meet Honey Nut: a delicious blend of honey and premium nuts. Explore ingredients, quality checks, sample packs and place a demo order.">
+  <meta name="theme-color" content="#f8f1e4">
+  <title>Honey Nut | Nature's Sweetness, Nutty Goodness</title>
+  <style>
+    :root {
+      --cream: #fbf6eb;
+      --cream-deep: #f1e6d2;
+      --paper: #fffdf8;
+      --ink: #2f2118;
+      --muted: #716357;
+      --green: #315b35;
+      --green-dark: #214327;
+      --green-pale: #e8f0df;
+      --honey: #e6a52d;
+      --honey-dark: #b87516;
+      --line: #e6dac7;
+      --shadow: 0 18px 48px rgba(74, 48, 20, .10);
+      --radius: 24px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: var(--green); font-size: .78rem; font-weight: 800;
+      letter-spacing: .13em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--honey); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { line-height: 1.12; }
+    h2 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.035em; }
+    .section-intro { max-width: 650px; color: var(--muted); font-size: 1.03rem; }
+    .section-heading { margin-bottom: 34px; }
+    .section-heading h2 { margin: 12px 0 12px; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(251, 246, 235, .94); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(80, 60, 40, .09);
+    }
+    .nav-wrap { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 900; line-height: 1.05; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      border-radius: 14px; background: var(--green-pale); color: var(--green); font-size: 1.45rem;
+    }
+    .brand-name { display: block; font-family: Georgia, serif; font-size: 1.45rem; letter-spacing: -.03em; }
+    .brand-tag { display: block; margin-top: 4px; color: var(--muted); font-size: .67rem; font-weight: 600; letter-spacing: .05em; }
+    .main-nav { display: flex; align-items: center; gap: clamp(16px, 2.6vw, 34px); color: #58483a; font-size: .91rem; font-weight: 700; }
+    .main-nav a { transition: color .2s ease; }
+    .main-nav a:hover { color: var(--green); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); background: var(--paper); border-radius: 13px; color: var(--ink); cursor: pointer; }
+
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      padding: 14px 23px; border: 0; border-radius: 999px;
+      background: var(--green); color: #fff; font-weight: 800; cursor: pointer;
+      box-shadow: 0 8px 20px rgba(49, 91, 53, .18); transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(49, 91, 53, .22); }
+    .btn-honey { background: var(--honey); color: #2f2118; box-shadow: 0 8px 20px rgba(230, 165, 45, .22); }
+    .btn-honey:hover { background: #f0b743; }
+    .btn-small { padding: 11px 18px; font-size: .88rem; }
+    .btn-arrow { font-size: 1.12rem; line-height: 1; }
+
+    .hero { padding: 28px 0 26px; }
+    .hero-card {
+      min-height: 530px; display: grid; grid-template-columns: .88fr 1.12fr;
+      overflow: hidden; border-radius: 34px; background: #f6ead4; box-shadow: var(--shadow);
+    }
+    .hero-copy { position: relative; z-index: 1; align-self: center; padding: clamp(34px, 5vw, 70px); }
+    .hero-copy h1 { margin: 15px 0 15px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(3.2rem, 7vw, 5.4rem); letter-spacing: -.065em; color: #402514; }
+    .hero-copy h1 span { color: var(--honey-dark); }
+    .hero-subtitle { max-width: 420px; margin-bottom: 24px; color: #665340; font-family: Georgia, serif; font-size: clamp(1.15rem, 2vw, 1.45rem); }
+    .hero-copy p:not(.hero-subtitle) { max-width: 430px; color: #65584c; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 28px; }
+    .text-link { color: var(--green); font-size: .92rem; font-weight: 800; }
+    .hero-photo { position: relative; min-height: 530px; background: #d6bd82; }
+    .hero-photo img { width: 100%; height: 100%; min-height: 530px; object-fit: cover; object-position: 59% center; }
+    .hero-photo::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 22%; background: linear-gradient(90deg, #f6ead4, rgba(246,234,212,0)); pointer-events: none; }
+    .hero-note { position: absolute; right: 24px; bottom: 24px; padding: 12px 16px; border: 1px solid rgba(255,255,255,.6); border-radius: 15px; background: rgba(255,253,248,.88); backdrop-filter: blur(8px); color: var(--green-dark); font-size: .8rem; font-weight: 800; }
+
+    .trust-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0 82px; }
+    .trust-item { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,253,248,.72); }
+    .trust-icon { flex: 0 0 38px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: var(--green-pale); color: var(--green); font-size: 1.15rem; }
+    .trust-item strong { display: block; font-size: .9rem; }
+    .trust-item small { display: block; color: var(--muted); font-size: .74rem; }
+
+    section { padding: 24px 0 78px; }
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .benefit-card { padding: 27px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: 0 8px 24px rgba(74,48,20,.04); }
+    .benefit-icon { width: 52px; height: 52px; display: grid; place-items: center; margin-bottom: 20px; border-radius: 17px; background: #f8edcf; font-size: 1.45rem; }
+    .benefit-card h3 { margin-bottom: 9px; font-family: Georgia, serif; font-size: 1.28rem; }
+    .benefit-card p { margin-bottom: 0; color: var(--muted); font-size: .93rem; }
+
+    .story-section { background: #f3eadb; }
+    .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(28px, 5vw, 70px); }
+    .story-photo { position: relative; min-height: 440px; overflow: hidden; border-radius: 30px; background: #e2c88d; box-shadow: var(--shadow); }
+    .story-photo img { width: 100%; height: 100%; min-height: 440px; object-fit: cover; object-position: 73% center; }
+    .story-copy h2 { margin: 12px 0 16px; }
+    .story-copy > p { color: var(--muted); }
+    .steps { display: grid; gap: 15px; margin-top: 25px; }
+    .step { display: grid; grid-template-columns: 42px 1fr; gap: 13px; align-items: start; }
+    .step-number { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 13px; background: var(--green); color: white; font-weight: 900; }
+    .step strong { display: block; margin-bottom: 3px; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .quality-note { margin-top: 24px; padding: 15px 17px; border-left: 4px solid var(--honey); border-radius: 0 13px 13px 0; background: rgba(255,253,248,.74); color: #65513c; font-size: .86rem; }
+
+    .quality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .quality-panel { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .quality-panel h3 { margin-bottom: 14px; font-family: Georgia, serif; font-size: 1.4rem; }
+    .check-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .check-list li { display: flex; gap: 10px; color: #5e5145; font-size: .92rem; }
+    .check { flex: 0 0 22px; color: var(--green); font-weight: 900; }
+    .warning-box { margin-top: 18px; padding: 14px 15px; border: 1px solid #edd7a8; border-radius: 14px; background: #fff7e6; color: #725220; font-size: .85rem; }
+
+    .price-section { background: #f4ecdc; }
+    .price-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 34px; align-items: center; }
+    .price-photo { min-height: 430px; overflow: hidden; border-radius: 28px; background: #dec28a; box-shadow: var(--shadow); }
+    .price-photo img { width: 100%; height: 100%; min-height: 430px; object-fit: cover; object-position: 74% center; }
+    .price-copy h2 { margin: 12px 0; }
+    .price-copy > p { color: var(--muted); }
+    .price-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0 15px; }
+    .price-card { padding: 18px 13px; border: 1px solid #dfd0b8; border-radius: 17px; background: rgba(255,253,248,.78); text-align: center; }
+    .price-card.featured { border: 2px solid var(--green); background: #f3f7ec; transform: translateY(-5px); }
+    .price-card small { display: block; color: var(--muted); font-weight: 700; }
+    .price-card strong { display: block; margin: 6px 0 2px; color: var(--green-dark); font-family: Georgia, serif; font-size: clamp(1.25rem, 2.7vw, 1.75rem); }
+    .price-card em { display: block; min-height: 18px; color: var(--honey-dark); font-size: .68rem; font-style: normal; font-weight: 900; }
+    .price-fineprint { color: var(--muted); font-size: .78rem; }
+    .price-copy .btn { margin-top: 10px; }
+
+    .review-box { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; max-width: 800px; margin-inline: auto; padding: 30px; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); box-shadow: var(--shadow); }
+    .review-mark { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 18px; background: #fff0c9; color: var(--honey-dark); font-family: Georgia, serif; font-size: 2.2rem; }
+    .review-label { display: inline-block; margin-bottom: 8px; padding: 4px 9px; border-radius: 999px; background: #fff2d8; color: #875d1b; font-size: .68rem; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; }
+    .review-box blockquote { margin: 0 0 12px; color: #514235; font-family: Georgia, serif; font-size: 1.18rem; }
+    .review-box p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+    .faq-list { max-width: 850px; margin: 0 auto; display: grid; gap: 12px; }
+    details { padding: 0 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+    summary { position: relative; padding: 18px 30px 18px 0; cursor: pointer; color: #3e3025; font-weight: 800; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; top: 50%; right: 0; transform: translateY(-50%); color: var(--green); font-size: 1.35rem; }
+    details[open] summary::after { content: "−"; }
+    details p { margin: 0; padding: 0 0 18px; color: var(--muted); font-size: .92rem; }
+
+    .order-section { padding-top: 18px; }
+    .order-shell { display: grid; grid-template-columns: .86fr 1.14fr; overflow: hidden; border-radius: 30px; background: var(--green-dark); box-shadow: var(--shadow); }
+    .order-copy { padding: clamp(30px, 5vw, 58px); color: #fff; }
+    .order-copy .eyebrow { color: #f4ca70; }
+    .order-copy h2 { margin: 14px 0; color: #fff; }
+    .order-copy > p { color: rgba(255,255,255,.76); }
+    .order-points { display: grid; gap: 12px; margin-top: 28px; color: rgba(255,255,255,.9); font-size: .9rem; }
+    .order-points span { display: flex; gap: 10px; align-items: center; }
+    .order-form-wrap { padding: clamp(25px, 4vw, 48px); background: var(--paper); }
+    .order-form-wrap h3 { margin-bottom: 6px; font-family: Georgia, serif; font-size: 1.5rem; }
+    .form-intro { margin-bottom: 22px; color: var(--muted); font-size: .85rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #54483d; font-size: .82rem; font-weight: 800; }
+    .field input, .field select, .field textarea { width: 100%; min-height: 47px; padding: 11px 13px; border: 1px solid #dfd4c4; border-radius: 11px; outline: none; background: #fffefa; color: var(--ink); }
+    .field textarea { min-height: 86px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(49,91,53,.10); }
+    .order-total { display: flex; justify-content: space-between; align-items: center; margin: 19px 0; padding: 13px 15px; border-radius: 12px; background: var(--green-pale); color: var(--green-dark); font-weight: 800; }
+    .order-total strong { font-size: 1.25rem; }
+    .form-submit { width: 100%; }
+    .form-status { min-height: 22px; margin: 11px 0 0; color: var(--green); font-size: .82rem; }
+    .demo-note { margin: 16px 0 0; color: #786c5d; font-size: .73rem; }
+
+    .site-footer { padding: 28px 0 36px; color: #76685a; font-size: .82rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a:hover { color: var(--green); }
+    .demo-banner { margin-top: 20px; padding: 12px 15px; border: 1px solid #e9d4a8; border-radius: 12px; background: #fff7e5; color: #795b2a; font-size: .78rem; }
+
+    @media (max-width: 900px) {
+      .main-nav { gap: 16px; }
+      .hero-card { grid-template-columns: 1fr 1fr; min-height: 460px; }
+      .hero-photo, .hero-photo img { min-height: 460px; }
+      .trust-strip { grid-template-columns: repeat(2, 1fr); margin-bottom: 60px; }
+      .story-grid, .price-layout { grid-template-columns: 1fr 1fr; gap: 26px; }
+      .order-shell { grid-template-columns: .8fr 1.2fr; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .nav-wrap { min-height: 68px; }
+      .brand-name { font-size: 1.25rem; }
+      .brand-mark { width: 38px; height: 38px; }
+      .nav-actions > .btn { display: none; }
+      .menu-toggle { display: grid; place-items: center; }
+      .main-nav {
+        position: absolute; top: 68px; left: 14px; right: 14px; display: none;
+        padding: 13px; border: 1px solid var(--line); border-radius: 17px;
+        background: var(--paper); box-shadow: var(--shadow); flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .main-nav.is-open { display: flex; }
+      .main-nav a { padding: 12px 10px; border-radius: 10px; }
+      .main-nav a:hover { background: var(--green-pale); }
+      .hero { padding-top: 15px; }
+      .hero-card { display: flex; flex-direction: column; border-radius: 24px; }
+      .hero-copy { padding: 31px 25px 25px; }
+      .hero-copy h1 { font-size: clamp(3.1rem, 16vw, 4.5rem); }
+      .hero-photo { min-height: 300px; }
+      .hero-photo img { min-height: 300px; max-height: 360px; object-position: 62% center; }
+      .hero-photo::after { display: none; }
+      .hero-note { right: 13px; bottom: 13px; font-size: .7rem; }
+      .trust-strip { gap: 9px; margin: 14px 0 48px; }
+      .trust-item { padding: 12px 10px; gap: 9px; }
+      .trust-icon { flex-basis: 33px; width: 33px; height: 33px; font-size: 1rem; }
+      .trust-item strong { font-size: .78rem; }
+      .trust-item small { font-size: .67rem; }
+      section { padding: 18px 0 58px; }
+      .section-heading { margin-bottom: 24px; }
+      .benefit-grid { grid-template-columns: 1fr; gap: 12px; }
+      .benefit-card { display: grid; grid-template-columns: 48px 1fr; column-gap: 14px; padding: 19px; }
+      .benefit-icon { grid-row: span 2; width: 46px; height: 46px; margin: 0; }
+      .benefit-card h3 { align-self: end; margin-bottom: 5px; font-size: 1.14rem; }
+      .benefit-card p { font-size: .85rem; }
+      .story-grid, .quality-grid, .price-layout, .order-shell { grid-template-columns: 1fr; }
+      .story-photo, .story-photo img { min-height: 310px; max-height: 380px; }
+      .story-grid { gap: 26px; }
+      .quality-grid { gap: 13px; }
+      .quality-panel { padding: 21px; }
+      .price-layout { gap: 22px; }
+      .price-photo, .price-photo img { min-height: 300px; max-height: 370px; }
+      .price-cards { gap: 8px; }
+      .price-card { padding: 14px 7px; }
+      .price-card strong { font-size: 1.25rem; }
+      .review-box { padding: 22px; gap: 13px; }
+      .review-mark { width: 43px; height: 43px; border-radius: 14px; }
+      .review-box blockquote { font-size: 1.03rem; }
+      .order-shell { border-radius: 23px; }
+      .order-copy { padding: 30px 24px; }
+      .order-form-wrap { padding: 26px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 390px) {
+      .trust-strip { grid-template-columns: 1fr 1fr; }
+      .trust-item { align-items: flex-start; }
+      .price-cards { grid-template-columns: 1fr; }
+      .price-card.featured { transform: none; }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Honey Nut home">
+        <span class="brand-mark" aria-hidden="true">🐝</span>
+        <span><span class="brand-name">Honey Nut</span><span class="brand-tag">PURE GOODNESS, NATURALLY</span></span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <a href="#benefits">Benefits</a>
+        <a href="#story">Our Story</a>
+        <a href="#quality">Quality</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-small" href="#order">Order Now <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="eyebrow">A little jar of goodness</span>
+            <h1>Honey <span>Nut</span></h1>
+            <p class="hero-subtitle">Nature’s sweetness meets a satisfying, nutty crunch.</p>
+            <p>A simple, delicious blend of honey with almonds, cashews and walnuts. Enjoy it by the spoon, spread it on toast or add a little joy to your breakfast.</p>
+            <div class="hero-actions">
+              <a class="btn btn-honey" href="#order">Order your jar <span class="btn-arrow" aria-hidden="true">→</span></a>
+              <a class="text-link" href="#benefits">Discover Honey Nut ↓</a>
+            </div>
+          </div>
+          <div class="hero-photo">
+            <img src="assets/honey-nut-hero.webp" alt="A glass jar filled with golden honey and almonds, cashews and walnuts, beside a honey dipper" width="1500" height="844" fetchpriority="high">
+            <span class="hero-note">Honey + premium nuts</span>
+          </div>
+        </div>
+        <div class="trust-strip" aria-label="Product highlights">
+          <div class="trust-item"><span class="trust-icon" aria-hidden="true">🍯</span><span><strong>Honey base</strong><small>Sweet, rich flavour</small></span></div>
+          <div class="trust-item"><span class="trust-icon" aria-hidden="true">🌰</span><span><strong>Nut medley</strong><small>Almonds, cashews & walnuts</small></span></div>
+          <div class="trust-item"><span class="trust-icon" aria-hidden="true">🥄</span><span><strong>Easy to enjoy</strong><small>Breakfast or snack time</small></span></div>
+          <div class="trust-item"><span class="trust-icon" aria-hidden="true">🎁</span><span><strong>Giftable jar</strong><small>A thoughtful treat</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Good things in one jar</span>
+          <h2>Why choose Honey Nut?</h2>
+          <p class="section-intro">A tasty combination of two familiar ingredients, made for people who enjoy natural flavours and a little crunch in their day.</p>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card"><span class="benefit-icon" aria-hidden="true">🍯</span><h3>Naturally sweet</h3><p>Honey brings a rich, floral sweetness, so a small spoonful can add plenty of flavour to everyday foods.</p></article>
+          <article class="benefit-card"><span class="benefit-icon" aria-hidden="true">🌰</span><h3>Nutty goodness</h3><p>Almonds, cashews and walnuts contribute plant protein, fibre and unsaturated fats as part of a balanced diet.</p></article>
+          <article class="benefit-card"><span class="benefit-icon" aria-hidden="true">🥣</span><h3>Simple to serve</h3><p>Enjoy it with toast, oats, yoghurt or fruit—or take a small spoonful when you want a sweet snack.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section" id="story">
+      <div class="container story-grid">
+        <div class="story-photo">
+          <img src="assets/honey-nut-jar.webp" alt="Close-up of the Honey Nut jar showing whole nuts suspended in golden honey" width="850" height="1100" loading="lazy">
+        </div>
+        <div class="story-copy">
+          <span class="eyebrow">From hive to jar</span>
+          <h2>A thoughtful blend, made with care.</h2>
+          <p>For this product concept, the honey is sourced from beekeepers and the nuts are selected as food-grade ingredients. The ingredients are checked, combined in a clean food-preparation area and packed in a sealed jar.</p>
+          <div class="steps">
+            <div class="step"><span class="step-number">01</span><div><strong>Know the honey source</strong><p>Record the apiary or harvest region and the floral source when the supplier can verify it.</p></div></div>
+            <div class="step"><span class="step-number">02</span><div><strong>Select and inspect the nuts</strong><p>Use fresh, food-grade almonds, cashews and walnuts; check for damage, rancid odour and allergen handling.</p></div></div>
+            <div class="step"><span class="step-number">03</span><div><strong>Blend, seal and label</strong><p>Prepare hygienically and show the ingredient list, net weight, batch number, packing date and best-before date.</p></div></div>
+          </div>
+          <div class="quality-note">Sourcing note: Bangladeshi honey can come from floral sources such as mustard and litchi. The exact source for a real batch must be confirmed with its beekeeper or supplier.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quality">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Trust starts with transparency</span>
+          <h2>What quality should look like</h2>
+          <p class="section-intro">A good-looking jar is not proof of purity. Ask for traceable sourcing and proper checks before trusting any honey product.</p>
+        </div>
+        <div class="quality-grid">
+          <article class="quality-panel">
+            <h3>Check the label</h3>
+            <ul class="check-list">
+              <li><span class="check">✓</span><span>Ingredients are clearly listed: honey, almonds, cashews and walnuts.</span></li>
+              <li><span class="check">✓</span><span>Net weight, batch or lot code, packing date and best-before date are visible.</span></li>
+              <li><span class="check">✓</span><span>Seller can explain where the honey was collected and where the nuts came from.</span></li>
+              <li><span class="check">✓</span><span>Allergen information and storage instructions are easy to find.</span></li>
+            </ul>
+          </article>
+          <article class="quality-panel">
+            <h3>Ask for evidence</h3>
+            <ul class="check-list">
+              <li><span class="check">✓</span><span>Request a current, relevant laboratory report for honey quality and authenticity.</span></li>
+              <li><span class="check">✓</span><span>Look for hygienic handling, clean equipment and an intact safety seal.</span></li>
+              <li><span class="check">✓</span><span>Only use an “organic-certified” claim when valid certification covers the ingredients and product.</span></li>
+              <li><span class="check">✓</span><span>Remember: colour, thickness, crystallisation or home water tests cannot prove honey purity by themselves.</span></li>
+            </ul>
+            <div class="warning-box"><strong>Allergy & safety:</strong> Contains tree nuts. Do not give honey or honey-containing foods to children under 12 months.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="price-section" id="packages">
+      <div class="container price-layout">
+        <div class="price-photo">
+          <img src="assets/honey-nut-hero.webp" alt="Honey Nut jar with nuts and golden honey ready to serve" width="1500" height="844" loading="lazy">
+        </div>
+        <div class="price-copy">
+          <span class="eyebrow">Choose your jar</span>
+          <h2>A little or a lot of goodness.</h2>
+          <p>Pick a size that suits your home. The prices below are sample figures for this assignment and must be replaced with the seller’s confirmed rates.</p>
+          <div class="price-cards" aria-label="Sample package prices">
+            <div class="price-card"><small>250 g</small><strong>৳350</strong><em>Small jar</em></div>
+            <div class="price-card featured"><small>500 g</small><strong>৳650</strong><em>Popular choice</em></div>
+            <div class="price-card"><small>1 kg</small><strong>৳1,200</strong><em>Family jar</em></div>
+          </div>
+          <p class="price-fineprint">Sample pricing only • Delivery charge and service area to be confirmed at order time.</p>
+          <a class="btn" href="#order">Choose your pack <span class="btn-arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-heading" style="text-align:center;">
+          <span class="eyebrow">A note before launch</span>
+          <h2>Customer stories belong here.</h2>
+          <p class="section-intro" style="margin-inline:auto;">Real feedback helps a small food business earn trust. This sample layout shows where verified customer reviews can go.</p>
+        </div>
+        <div class="review-box">
+          <div class="review-mark" aria-hidden="true">“</div>
+          <div>
+            <span class="review-label">Demo placeholder — not a real review</span>
+            <blockquote>“I enjoy the mix of smooth honey and crunchy nuts. It makes my breakfast feel a little more special.”</blockquote>
+            <p>Replace this sample quote with an approved review from a real customer before publishing. Do not publish invented names, ratings or testimonials.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-heading" style="text-align:center;">
+          <span class="eyebrow">Good to know</span>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div class="faq-list">
+          <details><summary>What is inside a Honey Nut jar?</summary><p>This concept uses honey blended with almonds, cashews and walnuts. The final seller should confirm the exact recipe and print the complete ingredient list on the jar.</p></details>
+          <details><summary>Is this product certified organic?</summary><p>This demo page does not claim organic certification. A real seller should use the word “organic” only when they hold valid documentation that covers the relevant ingredients and product.</p></details>
+          <details><summary>How can I check the honey is genuine?</summary><p>Ask for the harvest source, batch traceability and a relevant laboratory report. Common home tests are not reliable proof of authenticity.</p></details>
+          <details><summary>How should I store the jar?</summary><p>Keep it tightly closed in a cool, dry place away from direct sunlight. Follow the storage and best-before information supplied on the final product label.</p></details>
+          <details><summary>Does it contain allergens?</summary><p>Yes. This recipe contains tree nuts. It may not be suitable for anyone with a nut allergy. Honey must not be given to children under 12 months.</p></details>
+          <details><summary>Do you deliver across Bangladesh?</summary><p>Delivery coverage, courier options, delivery fees and estimated time are not set for this demo. The seller should add confirmed delivery details before accepting live orders.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="container">
+        <div class="order-shell">
+          <div class="order-copy">
+            <span class="eyebrow">Make it part of your day</span>
+            <h2>Your Honey Nut jar is one step away.</h2>
+            <p>Choose your pack and enter your details. This demo form calculates your sample subtotal; connect the seller’s WhatsApp or checkout system before using it for real orders.</p>
+            <div class="order-points">
+              <span>✓ One product, three jar sizes</span>
+              <span>✓ Clear ingredient and allergen information</span>
+              <span>✓ Delivery details confirmed by the seller</span>
+            </div>
+          </div>
+          <div class="order-form-wrap">
+            <h3>Place a demo order</h3>
+            <p class="form-intro">Fill in the details to prepare your order request.</p>
+            <form id="orderForm">
+              <div class="form-grid">
+                <div class="field"><label for="customerName">Your name</label><input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Enter your name" required></div>
+                <div class="field"><label for="customerPhone">Phone number</label><input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="01XXXXXXXXX" pattern="[+0-9 -]{8,18}" required></div>
+                <div class="field"><label for="packSize">Choose jar size</label><select id="packSize" name="packSize"><option value="250">250 g — ৳350</option><option value="500" selected>500 g — ৳650</option><option value="1000">1 kg — ৳1,200</option></select></div>
+                <div class="field"><label for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="1" max="20" value="1" required></div>
+                <div class="field full"><label for="deliveryAddress">Delivery address</label><textarea id="deliveryAddress" name="deliveryAddress" autocomplete="street-address" placeholder="House, road, area, district" required></textarea></div>
+              </div>
+              <div class="order-total"><span>Sample subtotal</span><strong id="orderTotal">৳650</strong></div>
+              <button class="btn form-submit" type="submit">Prepare order request <span class="btn-arrow" aria-hidden="true">→</span></button>
+              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+              <p class="demo-note">Demo only: your details are not sent or stored. A real business WhatsApp number or order backend must be connected before launch.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">🐝</span><span><span class="brand-name">Honey Nut</span><span class="brand-tag">PURE GOODNESS, NATURALLY</span></span></a>
+        <div class="footer-links"><a href="#benefits">Benefits</a><a href="#quality">Quality</a><a href="#faq">FAQ</a><a href="#order">Order</a></div>
+        <span>© <span id="year">2026</span> Honey Nut • Demo landing page</span>
+      </div>
+      <div class="demo-banner"><strong>Academic project notice:</strong> Honey Nut is a sample product concept, not a verified operating business. Pack prices are illustrative. Confirm ingredients, sourcing, organic status, reviews, delivery terms and seller contact details before publishing it as a real shop.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+    mainNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    // Sample product prices in Bangladeshi taka (BDT).
+    const samplePrices = { '250': 350, '500': 650, '1000': 1200 };
+    const packSize = document.getElementById('packSize');
+    const quantity = document.getElementById('quantity');
+    const orderTotal = document.getElementById('orderTotal');
+    const orderForm = document.getElementById('orderForm');
+    const formStatus = document.getElementById('formStatus');
+
+    function updateOrderTotal() {
+      const unitPrice = samplePrices[packSize.value] || 0;
+      const count = Math.max(1, Math.min(20, Number.parseInt(quantity.value, 10) || 1));
+      orderTotal.textContent = `৳${(unitPrice * count).toLocaleString('en-BD')}`;
+    }
+    packSize.addEventListener('change', updateOrderTotal);
+    quantity.addEventListener('input', updateOrderTotal);
+
+    orderForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!orderForm.reportValidity()) return;
+      formStatus.textContent = 'Your form is valid. This demo is not connected to a seller, so no order has been sent. Add a verified WhatsApp number or checkout service to accept real orders.';
+      formStatus.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateOrderTotal();
+  </script>
+</body>
+</html>
